@@ -1,0 +1,14 @@
+.nav {
+  display: flex;
+  gap: 12px;
+
+  background-color: #000;
+  padding: 4px 8px;
+  color: #ccc;
+
+  &__item {
+    &:hover {
+      color: rgb(253, 190, 72);
+    }
+  }
+}
