@@ -1,10 +1,25 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import * as dat from "lil-gui";
 
 export default function Fullscreen({ $target }) {
   const canvas = document.createElement("canvas");
 
   this.render = () => {
+    /**
+     * Debug
+     */
+    const gui = new dat.GUI();
+    gui.close();
+
+    const parameters = {
+      color: 0xff0000,
+    };
+
+    gui.addColor(parameters, "color").onChange(() => {
+      material.color.set(parameters.color);
+    });
+
     // Scene
     const scene = new THREE.Scene();
 
@@ -12,9 +27,13 @@ export default function Fullscreen({ $target }) {
      * Object
      */
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+    // const geometry = new THREE.SphereGeometry(1, 16, 16);
+    const material = new THREE.MeshBasicMaterial({ color: parameters.color });
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
+
+    gui.add(mesh.position, "y").min(-3).max(3).step(0.01).name("elevation");
+    gui.add(material, "wireframe");
 
     /**
      * Sizes
