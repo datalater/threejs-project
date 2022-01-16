@@ -1,4 +1,5 @@
 import "./assets/globalStyle.scss";
+import "./App.style.scss";
 import Nav from "./components/Nav";
 import Fullscreen from "./pages/Fullscreen";
 import { initRouter, routes } from "./router";

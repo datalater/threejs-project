@@ -1,11 +1,35 @@
+import "./Fullscreen.style.scss";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "lil-gui";
+import gsap from "gsap";
 
 export default function Fullscreen({ $target }) {
+  const $section = document.createElement("section");
+  $section.classList.add("fullscreen");
+
+  const $article = document.createElement("article");
+  $article.classList.add("fullscreen__article");
+
   const canvas = document.createElement("canvas");
+  canvas.classList.add("fullscreen__canvas");
 
   this.render = () => {
+    this.renderContent();
+    this.renderCanvas();
+
+    $target.appendChild($section);
+  };
+
+  this.renderContent = () => {
+    $article.innerHTML = `
+      <span class="fullscreen__text">"Double click to toggle fullscreen"</span>
+    `;
+
+    $section.appendChild($article);
+  };
+
+  this.renderCanvas = () => {
     /**
      * Debug
      */
@@ -13,7 +37,7 @@ export default function Fullscreen({ $target }) {
     gui.close();
 
     const parameters = {
-      color: 0xff0000,
+      color: 0x00eeff,
     };
 
     gui.addColor(parameters, "color").onChange(() => {
@@ -26,13 +50,16 @@ export default function Fullscreen({ $target }) {
     /**
      * Object
      */
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    // const geometry = new THREE.SphereGeometry(1, 16, 16);
-    const material = new THREE.MeshBasicMaterial({ color: parameters.color });
+    // const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.SphereGeometry(1, 16, 16);
+    const material = new THREE.MeshBasicMaterial({
+      color: parameters.color,
+      wireframe: true,
+    });
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    gui.add(mesh.position, "y").min(-3).max(3).step(0.01).name("elevation");
+    gui.add(mesh.position, "y").min(-3).max(3).step(0.01).name("meshY");
     gui.add(material, "wireframe");
 
     /**
@@ -53,8 +80,12 @@ export default function Fullscreen({ $target }) {
       0.1,
       100
     );
-    camera.position.z = 3;
+    camera.position.z = 7;
     scene.add(camera);
+
+    gui.add(camera.position, "z").min(0).max(10).step(0.01).name("cameraZ");
+    gui.add(camera.position, "x").min(-3).max(3).step(0.01).name("cameraX");
+    gui.add(camera.position, "y").min(-3).max(3).step(0.01).name("cameraY");
 
     // Controls
     const controls = new OrbitControls(camera, canvas);
@@ -83,8 +114,21 @@ export default function Fullscreen({ $target }) {
      */
     const clock = new THREE.Clock();
 
+    gsap.to(camera.position, { duration: 1, z: 3 });
+    gsap.to(camera.position, {
+      duration: 1,
+      delay: 0.7,
+      x: 2.04,
+      y: 1.53,
+      z: 2.75,
+    });
+
+    mesh.quaternion;
+
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
+      // mesh.rotation.x = elapsedTime;
+      mesh.rotation.y = elapsedTime * 0.2;
 
       // Update controls
       controls.update();
@@ -132,7 +176,7 @@ export default function Fullscreen({ $target }) {
         : null;
     });
 
-    $target.appendChild(canvas);
+    $section.appendChild(canvas);
   };
 
   this.render();
