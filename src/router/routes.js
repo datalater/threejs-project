@@ -7,6 +7,10 @@ const routes = [
     name: "Fullscreen",
     path: "/fullscreen",
   },
+  {
+    name: "Earth",
+    path: "/earth",
+  },
 ];
 
 export default routes;
