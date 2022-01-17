@@ -5,6 +5,15 @@ const path = require("path");
 
 module.exports = {
   entry: path.resolve(__dirname, "../src/index.js"),
+  resolve: {
+    extensions: [".js"],
+    alias: {
+      "@components": path.resolve(__dirname, "../src/components"),
+      "@pages": path.resolve(__dirname, "../src/pages"),
+      "@assets": path.resolve(__dirname, "../src/assets"),
+      "@router": path.resolve(__dirname, "../src/router"),
+    },
+  },
   output: {
     hashFunction: "xxhash64",
     filename: "bundle.[contenthash].js",

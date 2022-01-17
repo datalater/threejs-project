@@ -21,11 +21,11 @@ export default function Nav({ $target, initailState }) {
           .join("")}
       </ul>
     `;
+
+    $target.appendChild($nav);
   };
 
   this.render();
-
-  $target.appendChild($nav);
 
   $nav.addEventListener("click", (e) => {
     e.preventDefault();

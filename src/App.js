@@ -1,8 +1,8 @@
 import "./assets/globalStyle.scss";
 import "./App.style.scss";
-import Nav from "./components/Nav";
-import { Fullscreen, Earth } from "./pages";
-import { initRouter, routes } from "./router";
+import Nav from "@components/Nav";
+import { initRouter, routes } from "@router";
+import { render } from "./router";
 
 export default function App({ $target }) {
   const $main = document.createElement("main");
@@ -21,24 +21,17 @@ export default function App({ $target }) {
     },
   });
 
-  const fullscreen = new Fullscreen({ $target: $main });
-  const earth = new Earth({ $target: $main });
-
-  const renderFuctions = {
-    "/": () => fullscreen.render(),
-    "/fullscreen": () => fullscreen.render(),
-    "/earth": () => earth.render(),
-  };
-
   this.route = () => {
     $main.innerHTML = "";
 
     const { pathname } = window.location;
 
-    (renderFuctions[pathname] || renderFunctions["/"])();
+    render({ path: pathname, $target: $main });
+
+    $target.appendChild($main);
   };
 
   initRouter(() => this.route());
 
-  $target.appendChild($main);
+  this.route();
 }

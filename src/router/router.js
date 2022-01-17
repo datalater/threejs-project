@@ -1,3 +1,5 @@
+import routes, { NotFoundRoute } from "./routes";
+
 const ROUTE_CHANGE_EVENT_NAME = "route-change";
 
 export const initRouter = (onRoute) => {
@@ -19,4 +21,12 @@ export const push = (nextUrl) => {
       },
     })
   );
+};
+
+export const render = ({ path, $target }) => {
+  const route = routes.find((route) => route.path === path) || NotFoundRoute;
+
+  const component = new route.component({ $target });
+
+  component.render();
 };

@@ -15,7 +15,6 @@ module.exports = merge(commonConfiguration, {
     host: "local-ip",
     port: portFinderSync.getPort(8080),
     historyApiFallback: true,
-    open: true,
     https: false,
     allowedHosts: "all",
     hot: false,
