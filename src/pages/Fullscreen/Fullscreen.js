@@ -178,6 +178,4 @@ export default function Fullscreen({ $target }) {
 
     $section.appendChild(canvas);
   };
-
-  this.render();
 }
