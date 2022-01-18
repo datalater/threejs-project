@@ -1,4 +1,4 @@
-import { Fullscreen, Earth, NotFound } from "@pages";
+import { Fullscreen, Texture, Earth, NotFound } from "@pages";
 
 const routes = [
   {
@@ -10,6 +10,11 @@ const routes = [
     name: "Fullscreen",
     path: "/fullscreen",
     component: Fullscreen,
+  },
+  {
+    name: "Texture",
+    path: "/texture",
+    component: Texture,
   },
   {
     name: "Earth",

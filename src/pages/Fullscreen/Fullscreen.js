@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "lil-gui";
 import gsap from "gsap";
+import { fullscreen, updateCanvas } from "../../utils/eventFunctions";
 
 export default function Fullscreen({ $target }) {
   const $section = document.createElement("section");
@@ -40,10 +41,6 @@ export default function Fullscreen({ $target }) {
       color: 0x00eeff,
     };
 
-    gui.addColor(parameters, "color").onChange(() => {
-      material.color.set(parameters.color);
-    });
-
     // Scene
     const scene = new THREE.Scene();
 
@@ -59,8 +56,14 @@ export default function Fullscreen({ $target }) {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    gui.add(mesh.position, "y").min(-3).max(3).step(0.01).name("meshY");
-    gui.add(material, "wireframe");
+    const guiMesh = gui.addFolder("Mesh");
+    guiMesh.add(mesh.position, "x").min(-3).max(3).step(0.01);
+    guiMesh.add(mesh.position, "y").min(-3).max(3).step(0.01);
+    guiMesh.add(mesh.position, "z").min(-3).max(3).step(0.01);
+    guiMesh.add(material, "wireframe");
+    guiMesh.addColor(parameters, "color").onChange(() => {
+      material.color.set(parameters.color);
+    });
 
     /**
      * Sizes
@@ -83,9 +86,25 @@ export default function Fullscreen({ $target }) {
     camera.position.z = 7;
     scene.add(camera);
 
-    gui.add(camera.position, "z").min(0).max(10).step(0.01).name("cameraZ");
-    gui.add(camera.position, "x").min(-3).max(3).step(0.01).name("cameraX");
-    gui.add(camera.position, "y").min(-3).max(3).step(0.01).name("cameraY");
+    const guiCamera = gui.addFolder("Camera");
+    guiCamera
+      .add(camera.position, "x")
+      .min(-3)
+      .max(3)
+      .step(0.01)
+      .name("cameraX");
+    guiCamera
+      .add(camera.position, "y")
+      .min(-3)
+      .max(3)
+      .step(0.01)
+      .name("cameraY");
+    guiCamera
+      .add(camera.position, "z")
+      .min(0)
+      .max(10)
+      .step(0.01)
+      .name("cameraZ");
 
     // Controls
     const controls = new OrbitControls(camera, canvas);
@@ -123,8 +142,6 @@ export default function Fullscreen({ $target }) {
       z: 2.75,
     });
 
-    mesh.quaternion;
-
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
       // mesh.rotation.x = elapsedTime;
@@ -142,39 +159,8 @@ export default function Fullscreen({ $target }) {
 
     tick();
 
-    window.addEventListener("resize", () => {
-      // Update sizes
-      sizes.width = window.innerWidth;
-      sizes.height = window.innerHeight;
-
-      // Update camera
-      camera.aspect = sizes.width / sizes.height;
-      camera.updateProjectionMatrix();
-
-      // Update renderer
-      renderer.setSize(sizes.width, sizes.height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    });
-
-    window.addEventListener("dblclick", () => {
-      const fullscreenElement =
-        document.fullscreenElement || document.webkitFullscreenElement;
-
-      if (fullscreenElement) {
-        document.exitFullscreen
-          ? document.exitFullscreen()
-          : document.webkitFullscreenElement
-          ? document.webkitExitFullscreen()
-          : null;
-        return;
-      }
-
-      canvas.requestFullscreen
-        ? canvas.requestFullscreen()
-        : canvas.webkitRequestFullscreen
-        ? canvas.webkitRequestFullscreen()
-        : null;
-    });
+    window.addEventListener("resize", updateCanvas(sizes, camera, renderer));
+    window.addEventListener("dblclick", fullscreen(canvas));
 
     $section.appendChild(canvas);
   };

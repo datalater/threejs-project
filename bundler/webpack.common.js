@@ -12,6 +12,7 @@ module.exports = {
       "@pages": path.resolve(__dirname, "../src/pages"),
       "@assets": path.resolve(__dirname, "../src/assets"),
       "@router": path.resolve(__dirname, "../src/router"),
+      "@utils": path.resolve(__dirname, "../src/utils"),
     },
   },
   output: {
