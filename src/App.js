@@ -1,8 +1,7 @@
 import "./assets/globalStyle.scss";
 import "./App.style.scss";
-import Nav from "@components/Nav";
-import { initRouter, routes } from "@router";
-import { render } from "./router";
+import { Nav } from "@components";
+import { initRouter, routes, render } from "@router";
 
 export default function App({ $target }) {
   const $main = document.createElement("main");

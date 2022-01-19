@@ -1,4 +1,4 @@
-import { eventStore } from "@store";
+import { eventCleanStore } from "@store";
 import routes, { NotFoundRoute } from "./routes";
 
 const ROUTE_CHANGE_EVENT_NAME = "route-change";
@@ -25,15 +25,11 @@ export const push = (nextUrl) => {
 };
 
 export const render = ({ path, $target }) => {
-  while (eventStore.cleanups.length > 0) {
-    eventStore.cleanups.pop()();
-  }
+  eventCleanStore.clean();
 
   const route = routes.find((route) => route.path === path) || NotFoundRoute;
 
   const component = new route.component({ $target });
 
   component.render();
-
-  component.cleanups && eventStore.cleanups.push(...component.cleanups);
 };

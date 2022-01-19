@@ -1,1 +1,1 @@
-export { default as eventStore } from "./eventStore";
+export { default as eventCleanStore } from "./eventCleanStore";

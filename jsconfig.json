@@ -13,6 +13,12 @@
       "@router/*": ["./src/router/*"],
       "@utils/*": ["./src/utils/*"],
       "@store/*": ["./src/store/*"],
+      "@components": ["./src/components/index"],
+      "@pages": ["./src/pages/index"],
+      "@assets": ["./src/assets/index"],
+      "@router": ["./src/router/index"],
+      "@utils": ["./src/utils/index"],
+      "@store": ["./src/store/index"],
     }
   },
   "exclude": [

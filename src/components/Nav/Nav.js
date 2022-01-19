@@ -1,5 +1,5 @@
 import "./Nav.style.scss";
-import { push } from "../../router/router";
+import { push } from "@router";
 
 export default function Nav({ $target, initailState }) {
   const $nav = document.createElement("nav");

@@ -14,16 +14,6 @@ export default function Texture({ $target }) {
   };
 
   this.renderCanvas = () => {
-    const { canvas: drawnCanvas, cleanups } = draw(canvas);
-
-    this.setCleanups(cleanups);
-
-    $section.appendChild(drawnCanvas);
-  };
-
-  this.cleanups = [];
-
-  this.setCleanups = (cleanups) => {
-    this.cleanups = cleanups;
+    $section.appendChild(draw(canvas));
   };
 }

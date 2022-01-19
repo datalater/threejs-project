@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "lil-gui";
 import gsap from "gsap";
 import { fullscreen, updateCanvas } from "../../utils/eventFunctions";
+import { eventCleanStore } from "@store";
 
 export default function draw(canvas) {
   /**
@@ -121,15 +122,12 @@ export default function draw(canvas) {
   window.addEventListener("resize", updateCanvas(sizes, camera, renderer));
   window.addEventListener("dblclick", fullscreen(canvas));
 
-  return {
-    canvas,
-    cleanups: [
-      () =>
-        window.removeEventListener(
-          "resize",
-          updateCanvas(sizes, camera, renderer)
-        ),
-      () => window.removeEventListener("dblclick", fullscreen(canvas)),
-    ],
-  };
+  eventCleanStore.push(
+    ...[
+      () => window.removeEventListener("resize", updateCanvas),
+      () => window.removeEventListener("dblclick", fullscreen),
+    ]
+  );
+
+  return canvas;
 }
