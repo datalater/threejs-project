@@ -13,6 +13,7 @@ module.exports = {
       "@assets": path.resolve(__dirname, "../src/assets"),
       "@router": path.resolve(__dirname, "../src/router"),
       "@utils": path.resolve(__dirname, "../src/utils"),
+      "@store": path.resolve(__dirname, "../src/store"),
     },
   },
   output: {

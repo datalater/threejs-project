@@ -8,12 +8,6 @@ export default function App({ $target }) {
   const $main = document.createElement("main");
   $main.classList.add("main");
 
-  this.state = {};
-
-  this.setState = (nextState) => {
-    this.state = nextState;
-  };
-
   new Nav({
     $target,
     initailState: {

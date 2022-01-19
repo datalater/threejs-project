@@ -121,5 +121,15 @@ export default function draw(canvas) {
   window.addEventListener("resize", updateCanvas(sizes, camera, renderer));
   window.addEventListener("dblclick", fullscreen(canvas));
 
-  return canvas;
+  return {
+    canvas,
+    cleanups: [
+      () =>
+        window.removeEventListener(
+          "resize",
+          updateCanvas(sizes, camera, renderer)
+        ),
+      () => window.removeEventListener("dblclick", fullscreen(canvas)),
+    ],
+  };
 }
