@@ -71,9 +71,20 @@ export default function draw(canvas) {
   box2.position.y = 0.5;
   box2.position.z = -1.5;
 
+  // Box3 ======================================================
+
+  const textureDoor = textureLoader.load("/textures/door/color.jpg");
+  textureDoor.wrapS = THREE.RepeatWrapping;
+  textureDoor.wrapT = THREE.RepeatWrapping;
+  textureDoor.repeat.set(2, 2);
+
+  textureDoor.center.x = 0.5;
+  textureDoor.center.y = 0.5;
+  textureDoor.rotation = Math.PI * 0.25;
+
   const box3 = new THREE.Mesh(
     new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ map: texture.door })
+    new THREE.MeshBasicMaterial({ map: textureDoor })
   );
 
   scene.add(box3);
