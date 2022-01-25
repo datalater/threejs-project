@@ -161,6 +161,13 @@ export default function draw(canvas) {
     // Update controls
     controls.update();
 
+    // Update objects
+    box.rotation.y = elapsedTime * 0.01;
+    sphere.rotation.y = elapsedTime * 0.5;
+    box2.rotation.y = -(elapsedTime * 0.25);
+    box3.rotation.y = elapsedTime * 0.3;
+    box3.rotation.x = elapsedTime * 0.3;
+
     // Render
     renderer.render(scene, camera);
 
