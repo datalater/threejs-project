@@ -30,6 +30,7 @@
     },
     "devDependencies": {
         "postcss-loader": "^6.2.1",
+        "prettier": "2.5.1",
         "sass": "^1.48.0",
         "sass-loader": "^12.4.0",
         "stylelint": "^14.5.0",
