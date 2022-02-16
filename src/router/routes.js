@@ -1,4 +1,5 @@
 import { Fullscreen, Texture, HountedHouse, Earth, NotFound } from "@pages";
+import ScrollBasedAnimation from "@pages/ScrollBasedAnimation/ScrollBasedAnimation";
 
 const routes = [
   {
@@ -17,15 +18,20 @@ const routes = [
     component: Texture,
   },
   {
-    name: "HountedHouse",
+    name: "Hounted House",
     path: "/hountedhouse",
     component: HountedHouse,
   },
   {
-    name: "Earth",
-    path: "/earth",
-    component: Earth,
+    name: "Scroll Based Animation",
+    path: "/scrollbasedanimation",
+    component: ScrollBasedAnimation,
   },
+  // {
+  //   name: "Earth",
+  //   path: "/earth",
+  //   component: Earth,
+  // },
 ];
 
 export const NotFoundRoute = {
