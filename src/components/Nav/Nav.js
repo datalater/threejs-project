@@ -3,6 +3,7 @@ import { push } from "@router";
 
 export default function Nav({ $target, initailState }) {
   const $nav = document.createElement("nav");
+  $nav.classList.add("nav");
 
   this.state = initailState || {
     routes: [],
@@ -12,11 +13,12 @@ export default function Nav({ $target, initailState }) {
     const { routes } = this.state;
 
     $nav.innerHTML = `
-      <ul class="nav">
+      <div class="nav__button"></div>
+      <ul class="menu">
         ${routes
           .map(
             ({ name, path }) =>
-              `<li class="nav__item"><a href="${path}">${name}</a></li>`
+              `<li class="menu__item"><a href="${path}">${name}</a></li>`
           )
           .join("")}
       </ul>
