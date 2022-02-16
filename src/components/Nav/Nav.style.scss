@@ -25,9 +25,8 @@
 
     &::after {
       position: absolute;
-      top: calc(50% - 2px);
-      left: calc(50% - 6px);
-      content: "";
+      top: calc(50% - 3px);
+      content: '';
       width: 0px;
       height: 0px;
       border-left: 6px solid transparent;
