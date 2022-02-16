@@ -38,4 +38,18 @@ export default function Nav({ $target, initailState }) {
       push($page.href);
     }
   });
+
+  $nav.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const $button = e.target.closest(".nav__button");
+
+    if ($button) {
+      $nav.classList.toggle("nav--open");
+
+      setTimeout(() => {
+        $nav.classList.toggle("nav--open");
+      }, 3000);
+    }
+  });
 }

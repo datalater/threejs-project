@@ -9,23 +9,6 @@
   height: 36px;
   border-radius: 50%;
 
-  &:hover {
-    .nav__button {
-      background-color: #ffa600;
-
-      &::after {
-        transform: rotate(180deg);
-        border-top: 6px solid #fff;
-      }
-    }
-
-    .menu {
-      max-height: 500px;
-      border: 1px solid #999;
-      transition: max-height 0.5s cubic-bezier(0.98, 0.04, 0.7, 0.32);
-    }
-  }
-
   &__button {
     display: flex;
     align-items: center;
@@ -81,6 +64,24 @@
         color: #fff;
         background-color: #ffa600;
       }
+    }
+  }
+
+  &--open,
+  &:hover {
+    .nav__button {
+      background-color: #ffa600;
+
+      &::after {
+        transform: rotate(180deg);
+        border-top: 6px solid #fff;
+      }
+    }
+
+    .menu {
+      max-height: 500px;
+      border: 1px solid #999;
+      transition: max-height 0.5s cubic-bezier(0.98, 0.04, 0.7, 0.32);
     }
   }
 }
