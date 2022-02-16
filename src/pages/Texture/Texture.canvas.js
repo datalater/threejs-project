@@ -22,9 +22,7 @@ export default function draw(canvas) {
    * Texture
    */
   const loadingManager = new THREE.LoadingManager();
-  loadingManager.onProgress = (item, loaded, total) => {
-    console.log(`${item}: ${loaded}/${total}`);
-  };
+  loadingManager.onProgress = (item, loaded, total) => {};
   const textureLoader = new THREE.TextureLoader(loadingManager);
 
   const texture = {
