@@ -10,6 +10,7 @@ export default function draw(canvas) {
    */
   // Debug
   const gui = new dat.GUI();
+  gui.close();
 
   // Scene
   const scene = new THREE.Scene();
