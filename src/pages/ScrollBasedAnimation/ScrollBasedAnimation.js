@@ -3,7 +3,8 @@ import draw from './ScrollBasedAnimation.canvas'
 import { dom, getFunctionName } from '@utils'
 
 export default function ScrollBasedAnimation({ $target }) {
-  const className = getFunctionName().toLowerCase()
+  // const className = getFunctionName().toLowerCase()
+  const className = 'ScrollBasedAnimation'.toLowerCase()
 
   this.render = () => {
     const $section = dom.section(className)
