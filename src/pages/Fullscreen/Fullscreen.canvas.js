@@ -1,9 +1,9 @@
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import * as dat from "lil-gui";
-import gsap from "gsap";
-import { fullscreen, updateCanvas } from "../../utils/eventFunctions";
-import { eventCleanStore } from "@store";
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import gsap from 'gsap';
+import { fullscreen, updateCanvas } from '../../utils/eventFunctions';
+import { eventCleanStore } from '@store';
+import * as dat from 'lil-gui';
 
 export default function draw(canvas) {
   /**
@@ -31,12 +31,12 @@ export default function draw(canvas) {
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
-  const guiMesh = gui.addFolder("Mesh");
-  guiMesh.add(mesh.position, "x").min(-3).max(3).step(0.01);
-  guiMesh.add(mesh.position, "y").min(-3).max(3).step(0.01);
-  guiMesh.add(mesh.position, "z").min(-3).max(3).step(0.01);
-  guiMesh.add(material, "wireframe");
-  guiMesh.addColor(parameters, "color").onChange(() => {
+  const guiMesh = gui.addFolder('Mesh');
+  guiMesh.add(mesh.position, 'x').min(-3).max(3).step(0.01);
+  guiMesh.add(mesh.position, 'y').min(-3).max(3).step(0.01);
+  guiMesh.add(mesh.position, 'z').min(-3).max(3).step(0.01);
+  guiMesh.add(material, 'wireframe');
+  guiMesh.addColor(parameters, 'color').onChange(() => {
     material.color.set(parameters.color);
   });
 
@@ -61,10 +61,10 @@ export default function draw(canvas) {
   camera.position.z = 7;
   scene.add(camera);
 
-  const guiCamera = gui.addFolder("Camera");
-  guiCamera.add(camera.position, "x").min(-3).max(3).step(0.01).name("cameraX");
-  guiCamera.add(camera.position, "y").min(-3).max(3).step(0.01).name("cameraY");
-  guiCamera.add(camera.position, "z").min(0).max(10).step(0.01).name("cameraZ");
+  const guiCamera = gui.addFolder('Camera');
+  guiCamera.add(camera.position, 'x').min(-3).max(3).step(0.01).name('cameraX');
+  guiCamera.add(camera.position, 'y').min(-3).max(3).step(0.01).name('cameraY');
+  guiCamera.add(camera.position, 'z').min(0).max(10).step(0.01).name('cameraZ');
 
   // Controls
   const controls = new OrbitControls(camera, canvas);
@@ -119,14 +119,13 @@ export default function draw(canvas) {
 
   tick();
 
-  window.addEventListener("resize", updateCanvas(sizes, camera, renderer));
-  window.addEventListener("dblclick", fullscreen(canvas));
+  window.addEventListener('resize', updateCanvas(sizes, camera, renderer));
+  window.addEventListener('dblclick', fullscreen(canvas));
 
   eventCleanStore.push(
-    ...[
-      () => window.removeEventListener("resize", updateCanvas),
-      () => window.removeEventListener("dblclick", fullscreen),
-    ]
+    () => window.removeEventListener('resize', updateCanvas),
+    () => window.removeEventListener('dblclick', fullscreen),
+    () => gui.destroy()
   );
 
   return canvas;

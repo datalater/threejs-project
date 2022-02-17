@@ -1,19 +1,19 @@
-import draw from "./Texture.canvas";
+import style from './Texture.style';
+import draw from './Texture.canvas';
+import dom from '@utils/dom';
 
 export default function Texture({ $target }) {
-  const $section = document.createElement("section");
-  $section.classList.add("texture");
-
-  const canvas = document.createElement("canvas");
-  canvas.classList.add("texture__canvas");
+  const classname = 'texture';
 
   this.render = () => {
-    this.renderCanvas();
+    style();
+
+    const $section = dom.section(classname);
+
+    $section.appendChild(draw(dom.canvas(classname)));
 
     $target.appendChild($section);
-  };
 
-  this.renderCanvas = () => {
-    $section.appendChild(draw(canvas));
+    return $target;
   };
 }

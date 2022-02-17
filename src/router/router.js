@@ -1,7 +1,7 @@
-import { eventCleanStore } from "@store";
-import routes, { NotFoundRoute } from "./routes";
+import { eventCleanStore } from '@store';
+import routes, { NotFoundRoute } from './routes';
 
-const ROUTE_CHANGE_EVENT_NAME = "route-change";
+const ROUTE_CHANGE_EVENT_NAME = 'route-change';
 
 export const initRouter = (onRoute) => {
   window.addEventListener(ROUTE_CHANGE_EVENT_NAME, (e) => {
@@ -32,4 +32,6 @@ export const render = ({ path, $target }) => {
   const component = new route.component({ $target });
 
   component.render();
+
+  return $target;
 };

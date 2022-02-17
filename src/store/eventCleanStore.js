@@ -1,8 +1,8 @@
 const eventCleanStore = (function () {
   const cleanups = [];
 
-  const push = (cleanup) => {
-    cleanups.push(cleanup);
+  const push = (...items) => {
+    cleanups.push(...items);
   };
 
   const clean = () => {

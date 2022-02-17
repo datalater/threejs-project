@@ -1,11 +1,11 @@
-import "./assets/globalStyle.scss";
-import "./App.style.scss";
-import { Nav } from "@components";
-import { initRouter, routes, render } from "@router";
+import './assets/globalStyle.scss';
+import './App.style.scss';
+import { Nav } from '@components';
+import { initRouter, routes, render } from '@router';
+import { dom } from './utils';
 
 export default function App({ $target }) {
-  const $main = document.createElement("main");
-  $main.classList.add("main");
+  const $main = dom.element('main', 'main');
 
   new Nav({
     $target,
@@ -15,13 +15,11 @@ export default function App({ $target }) {
   });
 
   this.route = () => {
-    $main.innerHTML = "";
+    $main.innerHTML = '';
 
     const { pathname } = window.location;
 
-    render({ path: pathname, $target: $main });
-
-    $target.appendChild($main);
+    $target.appendChild(render({ path: pathname, $target: $main }));
   };
 
   initRouter(() => this.route());

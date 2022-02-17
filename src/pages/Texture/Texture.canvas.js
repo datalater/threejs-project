@@ -1,9 +1,9 @@
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import * as dat from "lil-gui";
-import gsap from "gsap";
-import { fullscreen, updateCanvas } from "@utils/eventFunctions";
-import { eventCleanStore } from "@store";
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import gsap from 'gsap';
+import { fullscreen, updateCanvas } from '@utils/eventFunctions';
+import { eventCleanStore } from '@store';
+import * as dat from 'lil-gui';
 
 export default function draw(canvas) {
   /**
@@ -26,10 +26,10 @@ export default function draw(canvas) {
   const textureLoader = new THREE.TextureLoader(loadingManager);
 
   const texture = {
-    door: textureLoader.load("/textures/door/color.jpg"),
-    checkerboard: textureLoader.load("/textures/checkerboard-8x8.png"),
+    door: textureLoader.load('/textures/door/color.jpg'),
+    checkerboard: textureLoader.load('/textures/checkerboard-8x8.png'),
     graytile: textureLoader.load(
-      "/textures/TilesRectangularMirrorGray001_COL_1K.jpg"
+      '/textures/TilesRectangularMirrorGray001_COL_1K.jpg'
     ),
   };
 
@@ -71,7 +71,7 @@ export default function draw(canvas) {
 
   // Box3 ======================================================
 
-  const textureDoor = textureLoader.load("/textures/door/color.jpg");
+  const textureDoor = textureLoader.load('/textures/door/color.jpg');
   textureDoor.wrapS = THREE.RepeatWrapping;
   textureDoor.wrapT = THREE.RepeatWrapping;
   textureDoor.repeat.set(2, 2);
@@ -123,10 +123,10 @@ export default function draw(canvas) {
   camera.position.z = 0;
   scene.add(camera);
 
-  const guiCamera = gui.addFolder("Camera");
-  guiCamera.add(camera.position, "x").min(-3).max(3).step(0.01).name("cameraX");
-  guiCamera.add(camera.position, "y").min(-3).max(3).step(0.01).name("cameraY");
-  guiCamera.add(camera.position, "z").min(0).max(10).step(0.01).name("cameraZ");
+  const guiCamera = gui.addFolder('Camera');
+  guiCamera.add(camera.position, 'x').min(-3).max(3).step(0.01).name('cameraX');
+  guiCamera.add(camera.position, 'y').min(-3).max(3).step(0.01).name('cameraY');
+  guiCamera.add(camera.position, 'z').min(0).max(10).step(0.01).name('cameraZ');
 
   // Controls
   const controls = new OrbitControls(camera, canvas);
@@ -175,14 +175,13 @@ export default function draw(canvas) {
 
   tick();
 
-  window.addEventListener("resize", updateCanvas(sizes, camera, renderer));
-  window.addEventListener("dblclick", fullscreen(canvas));
+  window.addEventListener('resize', updateCanvas(sizes, camera, renderer));
+  window.addEventListener('dblclick', fullscreen(canvas));
 
   eventCleanStore.push(
-    ...[
-      () => window.removeEventListener("resize", updateCanvas),
-      () => window.removeEventListener("dblclick", fullscreen),
-    ]
+    () => window.removeEventListener('resize', updateCanvas),
+    () => window.removeEventListener('dblclick', fullscreen),
+    () => gui.destroy()
   );
 
   return canvas;

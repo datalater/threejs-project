@@ -1,15 +1,16 @@
-import './ScrollBasedAnimation.style.scss'
-import draw from './ScrollBasedAnimation.canvas'
-import { dom, getFunctionName } from '@utils'
+import style from './ScrollBasedAnimation.style';
+import draw from './ScrollBasedAnimation.canvas';
+import dom from '@utils/dom';
 
 export default function ScrollBasedAnimation({ $target }) {
-  // const className = getFunctionName().toLowerCase()
-  const className = 'ScrollBasedAnimation'.toLowerCase()
+  const className = 'ScrollBasedAnimation'.toLowerCase();
 
   this.render = () => {
-    const $section = dom.section(className)
+    style();
 
-    $section.appendChild(draw(dom.canvas(className)))
+    const $section = dom.section(className);
+
+    $section.appendChild(draw(dom.canvas(className)));
     $section.appendChild(
       dom.content(/* html */ `
         <section class="section">
@@ -22,8 +23,10 @@ export default function ScrollBasedAnimation({ $target }) {
             <h2>📞 연락처</h2>
         </section>
       `)
-    )
+    );
 
-    $target.appendChild($section)
-  }
+    $target.appendChild($section);
+
+    return $target;
+  };
 }

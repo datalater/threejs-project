@@ -1,14 +1,16 @@
 .fullscreen {
-  &__article {
-    background-color: #000;
-    color: #ccc;
-    
-    position: absolute;
-    top: 30%;
-    left: 5%;
+  &__canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
   }
 
-  &__canvas {
+  &__text {
+    position: relative;
+    top: 25vh;
+    left: 5vw;
 
+    color: #ccc;
   }
 }

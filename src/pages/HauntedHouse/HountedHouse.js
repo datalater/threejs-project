@@ -1,19 +1,19 @@
-import draw from "./HountedHouse.canvas";
+import style from './HountedHouse.style.js';
+import draw from './HountedHouse.canvas';
+import dom from '@utils/dom';
 
 export default function HountedHouse({ $target }) {
-  const $section = document.createElement("section");
-  $section.classList.add("hountedhouse");
-
-  const canvas = document.createElement("canvas");
-  canvas.classList.add("hountedhouse__canvas");
+  const classname = 'hountedhouse';
 
   this.render = () => {
-    this.renderCanvas();
+    style();
+
+    const $section = dom.section(classname);
+
+    $section.appendChild(draw(dom.canvas(classname)));
 
     $target.appendChild($section);
-  };
 
-  this.renderCanvas = () => {
-    $section.appendChild(draw(canvas));
+    return $target;
   };
 }
