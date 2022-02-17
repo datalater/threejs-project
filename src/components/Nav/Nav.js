@@ -1,16 +1,16 @@
-import './Nav.style.scss'
-import { push } from '@router'
+import './Nav.style.scss';
+import { push } from '@router';
 
 export default function Nav({ $target, initailState }) {
-  const $nav = document.createElement('nav')
-  $nav.classList.add('nav')
+  const $nav = document.createElement('nav');
+  $nav.classList.add('nav');
 
   this.state = initailState || {
     routes: [],
-  }
+  };
 
   this.render = () => {
-    const { routes } = this.state
+    const { routes } = this.state;
 
     $nav.innerHTML = `
       <div class="nav__button"></div>
@@ -22,36 +22,42 @@ export default function Nav({ $target, initailState }) {
           )
           .join('')}
       </ul>
-    `
+    `;
 
-    $target.appendChild($nav)
-  }
+    $target.appendChild($nav);
+  };
 
-  this.render()
+  this.render();
 
   $nav.addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const $page = e.target.closest('a')
+    const $navItem = e.target.closest('li');
 
-    if ($page) {
-      push($page.href)
+    if (!$navItem) {
+      return;
     }
-  })
+
+    const $link = $navItem.querySelector('a');
+
+    if ($link) {
+      push($link.href);
+    }
+  });
 
   $nav.addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const $button = e.target.closest('.nav__button')
+    const $button = e.target.closest('.nav__button');
 
     if ($button) {
-      $nav.classList.toggle('nav--open')
+      $nav.classList.toggle('nav--open');
 
       setTimeout(() => {
         if ($nav.classList.contains('nav--open')) {
-          $nav.classList.toggle('nav--open')
+          $nav.classList.toggle('nav--open');
         }
-      }, 3000)
+      }, 1500);
     }
-  })
+  });
 }
